@@ -1,0 +1,9 @@
+time stamp
+int32[] pulses
+float64[] currents
+float64 hdeg
+float64 yawrate
+int32 accel_stat
+int32 mag_stat
+int32 gyro_stat
+int32 sys_stat

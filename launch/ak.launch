@@ -1,0 +1,4 @@
+<launch>
+  <include file="$(find gps_robo_car)/launch/rtk_compass.launch" />
+  <include file="$(find gps_robo_car)/launch/ak_odomonly.launch" />
+</launch>

@@ -1,0 +1,10 @@
+*.pyc
+*.log
+*.bag
+*.bag.active
+frames.gv
+frames.pdf
+config/
+unuse/
+test*.py
+#scripts/course_location.py

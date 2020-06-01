@@ -1,0 +1,27 @@
+<launch>
+  <node name="static_WorkOrigTF_PubPath" pkg="gps_robo_car" type="static_WorkOrigTF_PubPath.py" />
+
+  <node name="tf2_static_work_origin2odom" pkg="tf2_ros" type="static_transform_publisher" args="0 0 0 0 0 0 work_origin_in_utm54 odom"/>
+  <!--  rosrun tf2_ros static_transform_publisher 0 0 0 0 0 0 work_origin_in_utm54 odom --> 
+
+  <!--node name="sound_play" pkg="sound_play" type="soundplay_node.py"/-->
+  <node name="aqtalk_node" pkg="gps_robo_car" type="aqtalk_node.py"/>
+
+  <node name="joy" pkg="joy" type="joy_node">
+    <param name="autorepeat_rate" value="10"/>
+  </node>
+
+
+  <!--node name="ak_driver" pkg="gps_robo_car" type="ak_driver.py" respawn="true" output="screen"/-->
+  <!--node name="ak_driver" pkg="gps_robo_car" type="ak_driver.py" respawn="false" output="screen"/-->
+
+  <!--node name="RTK_compass" pkg="gps_robo_car" type="rtk_compass2.py" output="screen"/-->
+  <node name="RTK_compass_p12" pkg="gps_robo_car" type="rtk_compass2.py" output="screen">
+    <remap from="gps_sol_R" to="gps_sol_R_p12"/>
+    <remap from="gps_sol_L" to="gps_sol_L_p12"/>
+  </node>
+  <node name="raw_hdeg2yaw" pkg="gps_robo_car" type="ak_raw_hdeg2yaw.py" />
+
+  <!--node name="pos_estimator" pkg="gps_robo_car" type="pos_estimator.py" /-->
+
+</launch>

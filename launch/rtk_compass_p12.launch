@@ -1,0 +1,14 @@
+<launch>
+  <node name="rtk_L_p12" pkg="rtklib_ros_bridge" type="rtklib_bridge.py"> <!--output="screen"-->
+    <remap from="~gps_solution" to="gps_sol_L_p12"/>
+    <param name="rtklib_server_port" value="52031"/>  
+  </node>
+  <node name="rtk_R_p12" pkg="rtklib_ros_bridge" type="rtklib_bridge.py"> <!--output="screen"-->
+    <remap from="~gps_solution" to="gps_sol_R_p12"/>
+    <param name="rtklib_server_port" value="52032"/>
+  </node>
+  <node name="RTK_compass_p12" pkg="gps_robo_car" type="rtk_compass2.py" output="screen">
+    <remap from="gps_sol_R" to="gps_sol_R_p12"/>
+    <remap from="gps_sol_L" to="gps_sol_L_p12"/>
+  </node>
+</launch>
