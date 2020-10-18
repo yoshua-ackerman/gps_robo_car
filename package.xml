@@ -57,6 +57,7 @@
   <exec_depend>rospy</exec_depend>
 
   <exec_depend>python-pyproj</exec_depend>
+  <exec_depend>dxfgrabber</exec_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->

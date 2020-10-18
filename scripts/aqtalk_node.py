@@ -9,7 +9,7 @@ from std_msgs.msg import String
 import subprocess
 def aqtalk_cb(str):
     print str.data
-    popen=subprocess.Popen("/home/ackerman/Downloads/aquestalkpi/AquesTalkPi %s | aplay"%(str.data), \
+    popen=subprocess.Popen("$HOME/Downloads/aquestalkpi/AquesTalkPi %s | aplay"%(str.data), \
                            shell=True)
     popen.wait() #wait for speak
 

@@ -7,4 +7,4 @@ frames.pdf
 config/
 unuse/
 test*.py
-#scripts/course_location.py
+scripts/course_location.py

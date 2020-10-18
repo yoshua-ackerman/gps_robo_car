@@ -1,5 +1,6 @@
 <launch>
-  <node name="static_WorkOrigTF_PubPath" pkg="gps_robo_car" type="static_WorkOrigTF_PubPath.py" />
+  <!-- node name="static_WorkOrigTF_PubPath" pkg="gps_robo_car" type="static_WorkOrigTF_PubPath.py" /-->
+  <node name="work_offsetter" pkg="gps_robo_car" type="work_offsetter.py" />
 
   <node name="tf2_static_work_origin2odom" pkg="tf2_ros" type="static_transform_publisher" args="0 0 0 0 0 0 work_origin_in_utm54 odom"/>
   <!--  rosrun tf2_ros static_transform_publisher 0 0 0 0 0 0 work_origin_in_utm54 odom --> 

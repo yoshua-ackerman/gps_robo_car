@@ -17,7 +17,7 @@ pts2=[[35.66536847,139.79357178],
       [35.66549409,139.79371440],
       [35.66550084,139.79372173]]
 
-UTM_BASE_LON=139 #home:138.84, KAIYO-Univ:139.79 -> UTM_BASE_LON=54
+UTM_BASE_LON=139 #home:138.84, KAIYO-Univ:139.79 -> UTM zone number 54
 from pyproj import Proj,Geod
 def lon2utmzone(lon):
     #W180-W174:1

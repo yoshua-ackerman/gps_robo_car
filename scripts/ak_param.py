@@ -17,9 +17,10 @@ from numpy import pi
 #1回転あたりパルス: 216(モーター単体12*ギヤ比18)
 
 #Motor and encoder
-#RPS_MAX_NOGEAR=84 #Noload#84RPS~=5000RPM  #[(rotation)/sec]
-RPS_MAX_NOGEAR=67.2 # RPS:Rotation Per Second, 5000, Rated
-PPR_NOGEAR=12       # PPR:Pulse per Rotation [(pulse)/sec]
+#RPS_MAX_NOGEAR=84 #Noload#84RPS=5040RPM~=5000RPM  #[(rotation)/sec]
+RPS_MAX_NOGEAR=67.2 # RPS:Rotation Per Second, Rated, 4032=224*18RPM
+#PPR_NOGEAR=12       # PPR:Pulse per Rotation [(pulse)/sec]
+PPR_NOGEAR=16       # PPR:Pulse per Rotation [(pulse)/sec]
 GEAR_RATIO=18
 PPR=float(PPR_NOGEAR*GEAR_RATIO)
 RPS_MAX=RPS_MAX_NOGEAR/GEAR_RATIO
