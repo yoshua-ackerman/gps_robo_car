@@ -24,6 +24,8 @@ if __name__ == '__main__':
     xoffset=rospy.get_param('~xoffset', 0.0)
     yoffset=rospy.get_param('~yoffset', 0.0)
 
+    path_endlimit=rospy.get_param('~path_endlimit', 0.125) #0.25?
+
     path = dxf2path(fname)
 #    path = dxf2path("Geoglyph/dpreiwa-arcs.dxf")
 #    path = dxf2path("Geoglyph/dpreiwa-linepathtest.dxf")
@@ -41,8 +43,8 @@ if __name__ == '__main__':
 
     path_rosvis(path, "static_path")
 
-    path_tracer = PathTracer(path, 0.125)
-#    path_tracer = PathTracerDPReiwa(path, 0.125,(1,4),(2,5))
+    path_tracer = PathTracer(path, path_endlimit)
+#    path_tracer = PathTracerDPReiwa(path, path_endlimit,(1,4),(2,5))
     path_tracer.prompt(start_t)
     rospy.spin()
 

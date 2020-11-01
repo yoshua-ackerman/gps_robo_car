@@ -130,8 +130,8 @@ def gen_1lap_path():
         return gen_1lap_path_1ll(LON0,LAT0, SLANT_DEG, REIWA_PT_DIST, turn_r=TURN_R)
     elif True:
         #3点からパス生成(本番形式)
-        return gen_1lap_path_3ll(LON0,LAT0, LON1,LAT1, LON2,LAT2)
+        return gen_1lap_path_3ll(LON0,LAT0, LON1,LAT1, LON2,LAT2, turn_r=TURN_R)
     else:
         #2点からパス生成。いちおうつくったけどあんま使わん気ガス
-        return gen_1lap_path_2ll(LON1,LAT1, LON2,LAT2)
+        return gen_1lap_path_2ll(LON1,LAT1, LON2,LAT2, turn_r=TURN_R)
 

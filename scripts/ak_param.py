@@ -34,4 +34,4 @@ MAX_V=RPS_MAX*WHEEL_DIA*pi #[m/sec]
 
 
 LR_DIST=0.35 #アンテナ間距離[m]
-LR_DIST_TOLE=0.08 #アンテナ間距離への許容誤差[m]
+#LR_DIST_TOLE=0.08 #アンテナ間距離への許容誤差[m] #この値使ってない

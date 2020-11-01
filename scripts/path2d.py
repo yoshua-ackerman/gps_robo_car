@@ -144,8 +144,8 @@ class Line2D(object):
             #go to endpoint
             direction_diff = arctan2(self.end_y-y, self.end_x-x) - theta
             dist=dist2end
-#        return False, 0.0, omit_pi_pi(direction_diff)
-        return False, dist, omit_pi_pi(direction_diff)
+        return False, 0.0, omit_pi_pi(direction_diff)
+#        return False, dist, omit_pi_pi(direction_diff) #変な円弧を描いて遠回りに目標地点(start or end)に向かってしまう
     def pose_diff(self, pose):
         pose2d=Pose2D()
         pose2d.x=pose.position.x

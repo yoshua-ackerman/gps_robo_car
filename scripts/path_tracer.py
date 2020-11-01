@@ -42,7 +42,9 @@ def judge_reduce(dist_diff, direc_diff):
     x=abs(l/BALANCE_DIST)
     if x>1.0:
         x=1.0
-    xxx = (1.0-x)*omit_pi_pi(dth) + x*( omit_pi_pi(dth)+(-pi/2.0 if l>0 else +pi/2.0) )
+#    xxx = (1.0-x)*omit_pi_pi(dth) + x*( omit_pi_pi(dth)+(-pi/2.0 if l>0 else +pi/2.0) )
+#    xxx = omit_pi_pi(dth) + x*(-pi/2.0 if l>0 else +pi/2.0)
+    xxx = omit_pi_pi(dth + x*(-pi/2.0 if l>0 else +pi/2.0)) #結果を-pi~+piに変換
     xxx = xxx/pi # -1.5~+1.5
     #xxx>0:CCW,正回転(左輪減速)
     #xxx=0:両輪全速の前進
@@ -127,7 +129,7 @@ class PathTracer(object):
             R=self.path[self.current].R
             T=TREAD
             inner_ratio=(2.0*R-T)/(2.0*R+T)
-            rospy.loginfo("R=%.1f, inner_ratio=%.2f"%(R, inner_ratio))
+            rospy.loginfo("R=%.2f, inner_ratio=%.2f"%(R, inner_ratio))
 
         #inner_ratio: 円弧パス上で位置も向きも沿ってる場合の内輪の外輪(常に速度MAX)に対する速度比
         #inner_ratio2:パスに沿ってないときに沿わすための減速との合成比
@@ -213,9 +215,11 @@ if __name__ == '__main__':
 
     rospy.init_node('path_tracer')
 
+    path_endlimit=rospy.get_param('~path_endlimit', 0.125) #0.25?
+
     path_rosvis(path, "static_path")
 
-    path_tracer = PathTracerDPReiwa(path, 0.125,(1,5),(3,7))
+    path_tracer = PathTracerDPReiwa(path, path_endlimit,(1,5),(3,7))
     path_tracer.prompt(start_t)
     rospy.spin()
 

@@ -132,7 +132,7 @@ def update_v(ak_raw_data):
     omega = (vr-vl) / TREAD
     omega_deg = rad2deg(omega)
     if omega!=0:
-        print "v,omega=%+5.2f,%+6.1f, R=+.1f"%(v,omega_deg,v/omega)
+        print "v,omega=%+5.2f,%+6.1f, R=%+.1f"%(v,omega_deg,v/omega)
     else:
         print "v,omega=%+5.2f,%+6.1f"%(v,omega_deg)
 

@@ -10,6 +10,7 @@ import tf_conversions
 import tf2_ros
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import Point, Pose, PoseWithCovarianceStamped, Quaternion, Twist, Vector3, TransformStamped
+from std_msgs.msg import String
 
 from numpy import pi,cos,sin
 
@@ -22,6 +23,7 @@ from gps_robo_car.msg import AkRawData
 
 
 rospy.init_node('postion_estimator')
+pub_aqtalk=rospy.Publisher("aqtalk_str", String, queue_size=3)
 odom_pub = rospy.Publisher("odom", Odometry, queue_size=50)
 odom_broadcaster = tf2_ros.TransformBroadcaster()
 
@@ -114,14 +116,32 @@ def update_pos_by_odom(od_msg):
 
     last_time = current_time
 
+
+last_t_reliable=None
+last_warn_t=None
+
 def update_pos_by_rtk(pose_by_rtk):
-    global x,y,th,last_time
-    if pose_by_rtk.pose.covariance[0]>0.25:
+    global x,y,th, last_t_reliable,last_warn_t
+
+    if pose_by_rtk.pose.covariance[0]>=0.75:
+        last_t_reliable = rospy.get_time()
+    if pose_by_rtk.pose.covariance[0]<0.25 and last_t_reliable!=None:
+        t_now = rospy.get_time()
+        if t_now - last_t_reliable > 10:
+            if last_warn_t == None:
+                pub_aqtalk.publish("位置情報来てません")
+                last_warn_t = rospy.get_time()
+            if last_warn_t - t_now>10:
+                pub_aqtalk.publish("位置情報来てません")
+                last_warn_t = rospy.get_time()
+
+    if pose_by_rtk.pose.covariance[0]>=0.25:
+#    if True:
         x=pose_by_rtk.pose.pose.position.x
         y=pose_by_rtk.pose.pose.position.y
         orientation_q = pose_by_rtk.pose.pose.orientation
         orientation_list = [orientation_q.x, orientation_q.y, orientation_q.z, orientation_q.w]
-        print orientation_list
+#        print orientation_list
         (roll, pitch, yaw) = tf_conversions.transformations.euler_from_quaternion (orientation_list)
         print (roll, pitch, yaw)
         th = yaw

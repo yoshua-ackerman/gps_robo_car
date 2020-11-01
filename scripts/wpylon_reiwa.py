@@ -28,11 +28,11 @@ if __name__ == '__main__':
 
     path_rosvis(path, "static_path")
 
-    path_err=0.125 #0.25?
+    path_endlimit=rospy.get_param('~path_endlimit', 0.125) #0.25?
     if len(path)==6:
-        path_tracer = PathTracerDPReiwa(path, path_err, (1,4),(2,5))
+        path_tracer = PathTracerDPReiwa(path, path_endlimit, (1,4),(2,5))
     elif len(path)==8:
-        path_tracer = PathTracerDPReiwa(path, path_err, (1,5),(3,7))
+        path_tracer = PathTracerDPReiwa(path, path_endlimit, (1,5),(3,7))
     else: #unknown path
         import sys
         sys.exit()

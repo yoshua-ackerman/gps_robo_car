@@ -172,29 +172,37 @@ class RtkCompass(object):
                 #　とりあえず実験走行は必ずperfect_fixさせてから
             elif fix_variance < 0.5 and t_now - self.yaw_raw_last_t < 0.2:
                 self.theta = self.yaw_raw + self.yaw_raw_offset
+                if fix_variance <0.25:
+                    fix_variance=0.25
         elif self.L_fix_stat==3 and t_now - self.yaw_raw_last_t < 0.2:
             self.theta = self.yaw_raw + self.yaw_raw_offset
             self.Cx = self.Lx - self.lr_real_dist/2.0 * cos(self.theta + pi/2.0)
             self.Cy = self.Ly - self.lr_real_dist/2.0 * sin(self.theta + pi/2.0)
             fix_variance = fix_variance *0.75
+            if fix_variance <0.5:
+                fix_variance=0.5
         elif self.R_fix_stat==3 and t_now - self.yaw_raw_last_t < 0.2:
             self.theta = self.yaw_raw + self.yaw_raw_offset
             self.Cx = self.Rx - self.lr_real_dist/2.0 * cos(self.theta - pi/2.0)
             self.Cy = self.Ry - self.lr_real_dist/2.0 * sin(self.theta - pi/2.0)
             fix_variance = fix_variance *0.75
+            if fix_variance <0.5:
+                fix_variance=0.5
         else:
             if t_now - self.yaw_raw_last_t < 0.2:
                 self.theta = self.yaw_raw + self.yaw_raw_offset
             self.Cx=(self.Lx+self.Rx)/2.0
             self.Cy=(self.Ly+self.Ry)/2.0
             fix_variance = fix_variance *0.5
+            if fix_variance >0.25:
+                fix_variance=0.25
 
         self.quat = tf_conversions.transformations.quaternion_from_euler(0,0,self.theta)
 
         L_fix_str = RtkCompass.fix_str[self.L_fix_stat]
         R_fix_str = RtkCompass.fix_str[self.R_fix_stat]
 
-        print L_fix_str, R_fix_str, "%5.3f[m],%.2f[deg], (Cx,Cy)=(%+.2f,%+.2f)"%(self.distance, rad2deg(self.theta), self.Cx,self.Cy)
+        print L_fix_str, R_fix_str, "%5.3f[m],%.2f[deg], (Cx,Cy)=(%+.2f,%+.2f), fix_reliable=%.2f"%(self.distance, rad2deg(self.theta), self.Cx,self.Cy, fix_variance)
 
         self.seq = self.seq+1
         header=Header()
