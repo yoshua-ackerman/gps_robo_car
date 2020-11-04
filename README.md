@@ -13,6 +13,8 @@ These codes and vehcle run with:
  - RTKLIB 2.4.2 with neo-M8T x2
  - Arduino UNO/nano and BNO055(currently, codes for Arduino are not in repositry)
 
+![system diagram](doc/gps_robocar_system.png)
+
 # video
  - https://youtu.be/2foByUpj73k (2020 presentation, currently Japanese only, sorry)
  - https://youtu.be/4AReDA8T_8c (2020 run)
